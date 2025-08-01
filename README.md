@@ -1,328 +1,150 @@
-<div align="center">
-🚀 Interface RAG Chat
-"Onde Documentos Encontram Inteligência"
-Transforme documentos estáticos em conversas dinâmicas com IA de ponta
+🤖 RAG Chat Interface
+Retrieval-Augmented Generation com interface web moderna usando Streamlit
+Interface intuitiva para fazer perguntas sobre documentos PDF ou conteúdo web, utilizando modelos de IA locais (Ollama) ou na nuvem (OpenAI).
 
-🎯 Demo • ⚡ Início Rápido • 📖 Documentação • 🤝 Contribuir
-
-</div>
-🌟 O Que Torna Isso Especial?
-<table> <tr> <td width="50%">
-🏠 Filosofia Local-First
-🔒 Zero Vazamento de Dados - Seus documentos nunca saem da sua máquina
-
-🚀 Ultra Rápido - Modelos Ollama executam localmente
-
-💰 Custo Zero - Sem custos de API para processamento local
-
-🛡️ Privacidade por Design - Controle total dos seus dados
-
-</td> <td width="50%">
-☁️ Poder da Nuvem Disponível
-🧠 Inteligência GPT-4 - Acesso aos modelos mais avançados
-
-🌍 Escala Global - Processe documentos de qualquer lugar
-
-⚡ Performance Otimizada - Inferência ultra-rápida na nuvem
-
-🔄 Troca Perfeita - Alterne entre local/nuvem instantaneamente
-
-</td> </tr> </table>
-🎯 Demo
-mermaid
-Copiar
-Editar
-graph LR
-    A[📄 Upload PDF] --> B[🤖 Escolha Modelo IA]
-    B --> C[❓ Faça Pergunta]
-    C --> D[💡 Resposta Inteligente]
-    
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
-De Documento a Insight em 30 Segundos
-⚡ Início Rápido
-<details> <summary><b>🔧 Configuração em Um Clique</b></summary>
-bash
-Copiar
-Editar
-# 🚀 Clone & Configure
-git clone <seu-repositorio>
-cd rag-chat-interface
-
-# 📦 Instalar Dependências
+🚀 Como executar
+bash# Instalar dependências
 pip install -r requirements.txt
 
-# 🔑 Configurar Ambiente
+# Configurar variáveis de ambiente
 cp .env.example .env
-# Adicione suas chaves API no .env
+# Edite o .env com suas configurações
 
-# 🎬 Executar Aplicação
+# Executar aplicação web
 streamlit run main.py
-🎉 Pronto! Sua interface RAG está online em http://localhost:8501
 
-</details> <details> <summary><b>🐳 Deploy Rápido com Docker</b></summary>
-bash
-Copiar
-Editar
-# 🏗️ Build & Execute
-docker build -t rag-chat .
-docker run -p 8501:8501 rag-chat
-
-# 🌐 Acesse em localhost:8501
-</details>
-🏗️ Arquitetura
-mermaid
-Copiar
-Editar
-flowchart TD
-    subgraph "🖥️ Camada Frontend"
-        A[Interface Streamlit] 
-        B[Upload de Arquivos]
-        C[Interface Chat]
-    end
-    
-    subgraph "🧠 Camada Processamento"
-        D[Parser Documentos]
-        E[Divisor de Texto]
-        F[Motor Embeddings]
-    end
-    
-    subgraph "🗃️ Camada Armazenamento"
-        G[FAISS Vector DB]
-        H[Arquivos Temporários]
-    end
-    
-    subgraph "🤖 Camada IA"
-        I[Ollama Local]
-        J[OpenAI Nuvem]
-    end
-    
-    A --> D
-    B --> D
-    D --> E
-    E --> F
-    F --> G
-    G --> I
-    G --> J
-    I --> C
-    J --> C
-📁 Estrutura do Projeto
-graphql
-Copiar
-Editar
+📁 Estrutura do projeto
 📦 rag-chat-interface/
-├── main.py                     # Interface Streamlit
-├── rag.py                      # Motor RAG
-├── vectordb.py                 # Banco Vetorial
-├── requirements.txt            # Dependências
-├── .env.example                # Configuração de Ambiente
-├── README.md                   # Documentação
-├── .gitignore                  # Git Ignore
-├── .github/
-│   └── copilot-instructions.md # Diretrizes IA
-└── __pycache__/                # Cache Python
-🎮 Showcase de Recursos
-<table> <tr> <td width="33%">
-📄 Processamento Inteligente de PDF
-🔍 Parsing Inteligente
+├── 📄 main.py                     # Interface Streamlit - App principal
+├── 🧠 rag.py                      # Motor RAG - Processamento de perguntas
+├── 🗃️ vectordb.py                 # Banco vetorial - FAISS + embeddings
+├── 📋 requirements.txt            # Dependências Python
+├── 🔧 .env.example               # Template de configuração
+├── 📖 README.md                  # Documentação do projeto
+├── 📂 .github/
+│   └── 📝 copilot-instructions.md # Instruções para GitHub Copilot
+└── 📂 __pycache__/               # Cache Python (auto-gerado)
 
-✂️ Divisão Otimizada
+✨ Funcionalidades
+🏠 Ollama Local
 
-🏷️ Preservação de Metadados
+🤖 Modelos executados localmente
+📄 Processamento de PDFs
+🌐 Análise de conteúdo web
+🔒 Privacidade total dos dados
 
-🚀 Processamento em Lote
+☁️ OpenAI Cloud
 
-</td> <td width="33%">
-🌐 Análise de Conteúdo Web
-🕷️ Scraping Inteligente
+🚀 GPT-4 via API
+📊 Processamento otimizado
+🌍 Acesso global
+⚡ Respostas rápidas
 
-🔗 Validação de URL
+🎯 Recursos Técnicos
 
-📊 Filtragem de Conteúdo
+Vector Database: FAISS para busca semântica
+Text Splitting: Chunks inteligentes para melhor contexto
+Dual Processing: Local (Ollama) + Cloud (OpenAI)
+File Handling: Upload seguro de PDFs com limpeza automática
+Web Scraping: Extração de conteúdo de URLs
 
-🔄 Tempo Real
 
-</td> <td width="33%">
-🧮 Inteligência Vetorial
-🎯 Busca Semântica
+🛠️ Tecnologias
+ComponenteTecnologiaInterfaceStreamlitLLM LocalOllama (Gemma 12B)LLM CloudOpenAI GPT-4o-miniEmbeddingsOpenAI + Snowflake ArcticVector DBFAISSPDF ParserPyPDFWeb LoaderLangChain WebBase
 
-📐 Pontuação de Similaridade
+🔧 Configuração
+Arquivo .env
+env# OpenAI (para modo nuvem)
+OPENAI_API_KEY=sua_chave_aqui
 
-💾 Armazenamento FAISS
-
-⚡ Respostas Rápidas
-
-</td> </tr> </table>
-🛠️ Stack Tecnológica
-Categoria	Tecnologia	Propósito
-🎨 Frontend	Streamlit	Interface Web Interativa
-🧠 LLM Local	Ollama	Modelos Locais Privados
-☁️ LLM Nuvem	OpenAI	IA de Nuvem Avançada
-🔗 Framework	LangChain	Framework de Aplicações IA
-🗃️ Banco Vetorial	FAISS	Busca por Similaridade
-📄 Parser PDF	PyPDF	Processamento de Documentos
-🌐 Web Scraper	WebLoader	Extração de Conteúdo da Web
-
-⚙️ Configuração
-<details> <summary><b>🔐 Configuração de Ambiente</b></summary>
-env
-Copiar
-Editar
-# 🌟 Configuração OpenAI (Modo Nuvem)
-OPENAI_API_KEY=sk-sua-chave-secreta-aqui
-OPENAI_MODEL=gpt-4o-mini
-
-# 🏠 Configuração Ollama (Modo Local)
+# Ollama (para modo local)
 OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_LLM_MODEL=gemma3:12b
-OLLAMA_EMBED_MODEL=snowflake-arctic-embed2:latest
 
-# 🌐 Configurações Gerais
-USER_AGENT=rag-chat-interface/1.0
-LOG_LEVEL=INFO
-MAX_FILE_SIZE=50MB
-</details> <details> <summary><b>🤖 Configuração dos Modelos Ollama</b></summary>
-bash
-Copiar
-Editar
-# 📥 Baixar Modelos
+# Configurações gerais
+USER_AGENT=rag-chat-interface
+Modelos Ollama
+bash# Instalar modelos necessários
 ollama pull gemma3:12b
 ollama pull snowflake-arctic-embed2:latest
 
-# 🔍 Verificar Instalação
-ollama list
+🎮 Como usar
 
-# 🚀 Iniciar Serviço
-ollama serve
-</details>
-🎯 Guia de Uso
-🚀 Começando em 3 Passos
-1️⃣ Escolha Sua IA – Aba Ollama ou OpenAI
-2️⃣ Envie Seu Conteúdo – Upload de PDF ou URL
-3️⃣ Comece a Conversa – Faça perguntas e receba respostas
+Escolha o modo: Ollama (local) ou OpenAI (nuvem)
+Selecione a fonte: PDF upload ou URL
+Faça sua pergunta: Digite o que deseja saber
+Obtenha respostas: Contextualizadas com o documento
 
-💡 Casos de Uso
-<details> <summary><b>📚 Pesquisa Acadêmica</b></summary>
-Resumos de seções
+💡 Exemplos de uso
 
-Revisão de literatura
+"Resuma os pontos principais deste PDF"
+"Quais são as conclusões do artigo?"
+"Explique o conceito mencionado na página X"
 
-Interpretação estatística
 
-Esclarecimento de conceitos
+🔄 Fluxo de Dados
+mermaidgraph TD
+    A[👤 Usuário] --> B[🖥️ Interface Streamlit]
+    B --> C{📁 Fonte?}
+    
+    C -->|PDF| D[📄 Upload + Temp File]
+    C -->|URL| E[🌐 Web Scraping]
+    
+    D --> F[🔤 Text Splitting]
+    E --> F
+    
+    F --> G[🧮 Embeddings]
+    G --> H[🗃️ Vector Store FAISS]
+    
+    H --> I{🤖 Modelo?}
+    I -->|Local| J[🏠 Ollama]
+    I -->|Cloud| K[☁️ OpenAI]
+    
+    J --> L[💬 Resposta]
+    K --> L
+    
+    L --> B
+    B --> A
 
-</details> <details> <summary><b>📋 Inteligência de Negócios</b></summary>
-Análise de relatórios
+🧪 Arquitetura RAG
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   📄 Document   │ -> │  🔤 Text Split   │ -> │ 🧮 Embeddings  │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+         │                        │                        │
+         v                        v                        v
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│ 🗃️ Vector Store │ <- │ 🔍 Similarity    │ <- │ ❓ User Query   │
+└─────────────────┘    │    Search        │    └─────────────────┘
+         │              └──────────────────┘                │
+         v                        │                        v
+┌─────────────────┐              v              ┌─────────────────┐
+│ 📝 Context      │ -----------> 🤖 LLM ------> │ 💬 Answer      │
+└─────────────────┘              Model          └─────────────────┘
 
-Pesquisa de mercado
+📋 Requisitos
 
-Insights estratégicos
+Python: 3.8+
+Ollama: Para execução local
+OpenAI API: Para modo nuvem
+Dependências: Ver requirements.txt
 
-Análise competitiva
 
-</details> <details> <summary><b>📖 Aprendizado Pessoal</b></summary>
-Resumos de livros
+🚧 Desenvolvimento
+Estrutura de Códigos
 
-Geração de quiz
+main.py: Interface Streamlit com abas e controles
+rag.py: Lógica RAG, templates de prompt e chains
+vectordb.py: Carregamento de documentos e criação de embeddings
 
-Explicações simples
+Padrões utilizados
 
-Conexão entre ideias
+✅ Separação de responsabilidades
+✅ Funções modulares reutilizáveis
+✅ Gerenciamento seguro de arquivos temporários
+✅ Tratamento de diferentes fontes de dados
+✅ Interface responsiva e intuitiva
 
-</details>
-🚀 Recursos Avançados
-mermaid
-Copiar
-Editar
-mindmap
-  root((Recursos RAG))
-    Processamento Inteligente
-      Divisão Inteligente
-      Preservação Contexto
-      Extração Metadados
-    Suporte Multi-Modal
-      Documentos PDF
-      Conteúdo Web
-      Arquivos Texto
-    Flexibilidade IA
-      Modelos Locais
-      APIs Nuvem
-      Troca de Modelos
-    Segurança Primeiro
-      Limpeza Arquivos Temp
-      Proteção Privacidade
-      Processamento Seguro
-📊 Métricas de Performance
-Métrica	Local (Ollama)	Nuvem (OpenAI)
-🚀 Tempo Resposta	10–40 segundos	2–5 segundos
-💰 Custo por Query	R$ 0,00	~R$ 0,01
-🔒 Nível Privacidade	100% Privado	Processamento Nuvem
-📊 Qualidade da Resposta	5,5/10	9,5/10
 
-🔧 Desenvolvimento
-<details> <summary><b>🏗️ Configuração Desenvolvimento Local</b></summary>
-bash
-Copiar
-Editar
-git clone <seu-fork>
-cd rag-chat-interface
-
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# ou
-venv\Scripts\activate     # Windows
-
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
-
-pytest tests/
-black .
-isort .
-
-streamlit run main.py --server.runOnSave true
-</details> <details> <summary><b>📁 Organização do Código</b></summary>
-python
-Copiar
-Editar
-# main.py - UI
-# rag.py - lógica IA
-# vectordb.py - camada vetorial
-</details>
 🤝 Contribuição
-🌟 Adoramos Contribuidores!
-<details> <summary><b>🎯 Como Contribuir</b></summary>
-Fork
+Sinta-se à vontade para contribuir com melhorias, correções ou novas funcionalidades!
 
-Nova branch (feature/recurso-incrivel)
-
-Code & teste
-
-Commit (git commit -m 'Adiciona recurso incrível')
-
-Push
-
-Pull Request
-
-</details> <details> <summary><b>💡 Ideias de Contribuição</b></summary>
-Melhorias UI/UX
-
-Suporte a novos modelos
-
-Dashboard
-
-Suporte multi-idioma
-
-Segurança avançada
-
-Otimização para mobile
-
-</details>
-📜 Licença
-Este projeto está licenciado sob a Licença MIT
-
-🙏 Agradecimentos
-🚀 Construído com amor e IA
-
-Transformando a maneira como interagimos com documentos, uma pergunta por vez.
+🎯 Transforme documentos em conversas inteligentes!
