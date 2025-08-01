@@ -1,150 +1,104 @@
-🤖 RAG Chat Interface
-Retrieval-Augmented Generation com interface web moderna usando Streamlit
-Interface intuitiva para fazer perguntas sobre documentos PDF ou conteúdo web, utilizando modelos de IA locais (Ollama) ou na nuvem (OpenAI).
+# LangChain Tutorial Project
 
-🚀 Como executar
-bash# Instalar dependências
+Projeto Python simples para demonstrar uso do LangChain com OpenAI e RAG (Retrieval-Augmented Generation).
+
+## Como executar
+
+```bash
+# Instalar dependências
 pip install -r requirements.txt
 
 # Configurar variáveis de ambiente
 cp .env.example .env
-# Edite o .env com suas configurações
+# Edite o .env com sua chave da OpenAI
 
-# Executar aplicação web
-streamlit run main.py
+# Executar o projeto
+python main.py
+```
 
-📁 Estrutura do projeto
-📦 rag-chat-interface/
-├── 📄 main.py                     # Interface Streamlit - App principal
-├── 🧠 rag.py                      # Motor RAG - Processamento de perguntas
-├── 🗃️ vectordb.py                 # Banco vetorial - FAISS + embeddings
-├── 📋 requirements.txt            # Dependências Python
-├── 🔧 .env.example               # Template de configuração
-├── 📖 README.md                  # Documentação do projeto
-├── 📂 .github/
-│   └── 📝 copilot-instructions.md # Instruções para GitHub Copilot
-└── 📂 __pycache__/               # Cache Python (auto-gerado)
+## Estrutura do projeto
 
-✨ Funcionalidades
-🏠 Ollama Local
+```
+.
+├── main.py                     # Arquivo principal - demonstra LLMChain e RAG
+├── rag.py                      # Backend RAG - funções para perguntas com contexto
+├── vectordb.py                 # Carregamento e processamento de documentos
+├── requirements.txt            # Dependências do projeto
+├── .env.example               # Template de variáveis de ambiente
+├── .env                       # Suas chaves de API (não commitado)
+├── README.md                  # Este arquivo
+└── .github/
+    └── copilot-instructions.md # Instruções para o Copilot
+```
 
-🤖 Modelos executados localmente
-📄 Processamento de PDFs
-🌐 Análise de conteúdo web
-🔒 Privacidade total dos dados
+## Funcionalidades
 
-☁️ OpenAI Cloud
+- **LLMChain**: Perguntas diretas ao GPT
+- **RAG**: Perguntas baseadas em conteúdo web (Wikipedia)
+- **Vector Database**: FAISS para busca semântica
 
-🚀 GPT-4 via API
-📊 Processamento otimizado
-🌍 Acesso global
-⚡ Respostas rápidas
+## Requisitos
 
-🎯 Recursos Técnicos
+- Python 3.8+
+- Chave da API da OpenAI
 
-Vector Database: FAISS para busca semântica
-Text Splitting: Chunks inteligentes para melhor contexto
-Dual Processing: Local (Ollama) + Cloud (OpenAI)
-File Handling: Upload seguro de PDFs com limpeza automática
-Web Scraping: Extração de conteúdo de URLs
+## diagrama de fluxo de dados
 
-
-🛠️ Tecnologias
-ComponenteTecnologiaInterfaceStreamlitLLM LocalOllama (Gemma 12B)LLM CloudOpenAI GPT-4o-miniEmbeddingsOpenAI + Snowflake ArcticVector DBFAISSPDF ParserPyPDFWeb LoaderLangChain WebBase
-
-🔧 Configuração
-Arquivo .env
-env# OpenAI (para modo nuvem)
-OPENAI_API_KEY=sua_chave_aqui
-
-# Ollama (para modo local)
-OLLAMA_BASE_URL=http://localhost:11434
-
-# Configurações gerais
-USER_AGENT=rag-chat-interface
-Modelos Ollama
-bash# Instalar modelos necessários
-ollama pull gemma3:12b
-ollama pull snowflake-arctic-embed2:latest
-
-🎮 Como usar
-
-Escolha o modo: Ollama (local) ou OpenAI (nuvem)
-Selecione a fonte: PDF upload ou URL
-Faça sua pergunta: Digite o que deseja saber
-Obtenha respostas: Contextualizadas com o documento
-
-💡 Exemplos de uso
-
-"Resuma os pontos principais deste PDF"
-"Quais são as conclusões do artigo?"
-"Explique o conceito mencionado na página X"
-
-
-🔄 Fluxo de Dados
-mermaidgraph TD
-    A[👤 Usuário] --> B[🖥️ Interface Streamlit]
-    B --> C{📁 Fonte?}
-    
-    C -->|PDF| D[📄 Upload + Temp File]
-    C -->|URL| E[🌐 Web Scraping]
-    
-    D --> F[🔤 Text Splitting]
-    E --> F
-    
-    F --> G[🧮 Embeddings]
-    G --> H[🗃️ Vector Store FAISS]
-    
-    H --> I{🤖 Modelo?}
-    I -->|Local| J[🏠 Ollama]
-    I -->|Cloud| K[☁️ OpenAI]
-    
-    J --> L[💬 Resposta]
-    K --> L
-    
-    L --> B
-    B --> A
-
-🧪 Arquitetura RAG
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   📄 Document   │ -> │  🔤 Text Split   │ -> │ 🧮 Embeddings  │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-         │                        │                        │
-         v                        v                        v
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│ 🗃️ Vector Store │ <- │ 🔍 Similarity    │ <- │ ❓ User Query   │
-└─────────────────┘    │    Search        │    └─────────────────┘
-         │              └──────────────────┘                │
-         v                        │                        v
-┌─────────────────┐              v              ┌─────────────────┐
-│ 📝 Context      │ -----------> 🤖 LLM ------> │ 💬 Answer      │
-└─────────────────┘              Model          └─────────────────┘
-
-📋 Requisitos
-
-Python: 3.8+
-Ollama: Para execução local
-OpenAI API: Para modo nuvem
-Dependências: Ver requirements.txt
-
-
-🚧 Desenvolvimento
-Estrutura de Códigos
-
-main.py: Interface Streamlit com abas e controles
-rag.py: Lógica RAG, templates de prompt e chains
-vectordb.py: Carregamento de documentos e criação de embeddings
-
-Padrões utilizados
-
-✅ Separação de responsabilidades
-✅ Funções modulares reutilizáveis
-✅ Gerenciamento seguro de arquivos temporários
-✅ Tratamento de diferentes fontes de dados
-✅ Interface responsiva e intuitiva
-
-
-🤝 Contribuição
-Sinta-se à vontade para contribuir com melhorias, correções ou novas funcionalidades!
-
-🎯 Transforme documentos em conversas inteligentes!
+┌─────────────────┐
+│     .env        │
+│┌──────────────┐ │
+││OPENAI_API_KEY│ │
+││USER_AGENT    │ │
+│└──────────────┘ │
+└─────────┬───────┘
+          │
+          ▼
+┌──────────────────┐
+│    main.py       │
+│                  │
+│ ┌──────────────┐ │
+│ │ load_dotenv()│ │
+│ │ ChatOpenAI   │ │
+│ │ oscar()      │ │
+│ └──────────────┘ │
+└─────┬─────┬──────┘
+      │     │
+      │     │ ask_question()
+      │     ▼
+      │ ┌────────────────────┐
+      │ │     rag.py         │
+      │ │                    │
+      │ │ ┌────────────────┐ │
+      │ │ │create_llm()    │ │
+      │ │ │prompt_template │ │
+      │ │ │create_rag_chain│ │
+      │ │ └────────────────┘ │
+      │ └─────────┬──────────┘
+      │           │
+      │           │ load_vector_db()
+      │           ▼
+      │ ┌────────────────────┐
+      │ │   vectordb.py      │
+      │ │                    │
+      │ │ ┌────────────────┐ │
+      │ │ │WebBaseLoader   │ │
+      │ │ │OpenAIEmbeddings│ │
+      │ │ │TextSplitter    │ │
+      │ │ │FAISS           │ │
+      │ │ └────────────────┘ │
+      │ └─────────┬──────────┘
+      │           │
+      │           ▼
+      │ ┌──────────────────┐
+      │ │   Wikipedia      │
+      │ │ Oppenheimer Page │
+      │ └──────────────────┘
+      │
+      ▼
+┌─────────────────┐
+│   Terminal      │
+│   Output        │
+│                 │
+│ LLMChain: X     │
+│ RAG: Y          │
+└─────────────────┘
